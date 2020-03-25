@@ -1,20 +1,23 @@
 package org.phenoscape.sparql
 
-import org.apache.jena.graph.Node
-import org.apache.jena.query.ParameterizedSparqlString
-import org.apache.jena.rdf.model.{ Literal => JenaLiteral }
-import org.apache.jena.rdf.model.Property
-import org.apache.jena.rdf.model.Resource
-
 import contextual._
+import org.apache.jena.graph.Node
+import org.apache.jena.query.{ParameterizedSparqlString, Query, QueryFactory}
+import org.apache.jena.rdf.model.{Property, Resource, Literal => JenaLiteral}
 
 object SPARQLInterpolation {
 
-  final case class QueryText(text: String)
+  final case class QueryText(text: String) {
+
+    def toQuery: Query = QueryFactory.create(text)
+
+  }
 
   object SPARQLInterpolator extends Interpolator {
 
     override type Input = String
+
+    override type Output = QueryText
 
     sealed trait SPARQLContextType extends Context
 
