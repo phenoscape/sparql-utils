@@ -33,7 +33,7 @@ libraryDependencies ++= {
   Seq(
     "com.propensive"  %% "contextual"       % "1.2.1",
     "org.scala-lang"  %  "scala-reflect"     % scalaVersion.value % "provided",
-    "org.apache.jena" %  "apache-jena-libs" % "3.14.0"
+    "org.apache.jena" %  "apache-jena-libs" % "3.15.0"
   )
 }
 
