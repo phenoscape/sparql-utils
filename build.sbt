@@ -7,7 +7,9 @@ lazy val commonSettings = Seq(
   version := "1.2-SNAPSHOT",
   licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT")),
   homepage := Some(url("https://github.com/phenoscape/sparql-interpolator")),
-  crossScalaVersions := Seq("2.12.11", "2.13.2"),
+  crossScalaVersions := Seq("2.12.11"),
+  // Can't support 2.13 until new Contextual release: https://github.com/propensive/contextual/pull/56
+  //crossScalaVersions := Seq("2.12.11", "2.13.2"),
   scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 )
 
