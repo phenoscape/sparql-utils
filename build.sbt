@@ -60,7 +60,7 @@ lazy val core = project.in(file("modules/core"))
     libraryDependencies ++= Seq(
       "com.propensive" %% "contextual" % "1.2.1",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided",
-      "org.apache.jena" % "apache-jena-libs" % "3.15.0",
+      "org.apache.jena" % "jena-arq" % "3.15.0",
       "com.lihaoyi" %% "utest" % utestVersion % Test
     )
   )
