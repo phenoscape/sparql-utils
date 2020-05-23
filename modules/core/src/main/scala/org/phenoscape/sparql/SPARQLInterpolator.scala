@@ -9,6 +9,8 @@ object SPARQLInterpolation {
 
   final case class QueryText(text: String) {
 
+    def +(that: QueryText): QueryText = QueryText(this.text + that.text)
+
     def toQuery: Query = QueryFactory.create(text)
 
   }
