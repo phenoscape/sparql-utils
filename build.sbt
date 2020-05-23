@@ -74,7 +74,7 @@ lazy val owlapi = project.in(file("modules/owlapi"))
     name := "sparql-interpolator-owlapi",
     description := "SPARQL interpolator OWL API extension",
     libraryDependencies ++= Seq(
-      "net.sourceforge.owlapi" % "owlapi-distribution" % "4.5.16",
+      "net.sourceforge.owlapi" % "owlapi-distribution" % "5.1.14",
       "com.lihaoyi" %% "utest" % utestVersion % Test
     )
   )
