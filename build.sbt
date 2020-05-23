@@ -21,7 +21,7 @@ licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT"))
 
 homepage := Some(url("https://github.com/phenoscape/sparql-interpolator"))
 
-crossScalaVersions := Seq("2.12.10", "2.13.1")
+crossScalaVersions := Seq("2.12.11", "2.13.2")
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
@@ -32,7 +32,7 @@ fork in Test := true
 libraryDependencies ++= {
   Seq(
     "com.propensive"  %% "contextual"       % "1.2.1",
-    "org.scala-lang"  %  "scala-reflect"     % scalaVersion.value % "provided",
+    "org.scala-lang"  %  "scala-reflect"    % scalaVersion.value % "provided",
     "org.apache.jena" %  "apache-jena-libs" % "3.15.0"
   )
 }
