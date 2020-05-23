@@ -17,7 +17,7 @@ object SPARQLInterpolatorTest extends TestSuite {
       val string2 = "this is string 2"
       val int1 = ResourceFactory.createTypedLiteral(42)
       val int2 = 43
-      val queryPart = sparql"$uri3 $prop2 $int2  ."
+      val queryPart = sparql"$uri3 $prop2 $int2 ."
       val node1 = NodeFactory.createURI("http://example.org/node/1")
       val node2 = NodeFactory.createLiteral("à bientôt", "fr")
       val values = List(uri1, uri3, uri4).map(v => sparql"$v ").reduce(_ + _)
@@ -40,7 +40,7 @@ WHERE {
   VALUES ?x { <http://example.org/1> <http://example.org/3> <http://example.org/4>  }
   <http://example.org/1> <http://example.org/2> "this is string one" .
   <http://example.org/1> <http://example.org/2> "42"^^<http://www.w3.org/2001/XMLSchema#int> .
-  <http://example.org/3> <http://example.org/2> 43  .
+  <http://example.org/3> <http://example.org/2> 43 .
   <http://example.org/node/1> ?p "this is string 2" .
   ?s ?q "à bientôt"@fr .
 }
