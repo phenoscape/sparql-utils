@@ -59,6 +59,7 @@ lazy val core = project.in(file("modules/core"))
     description := "Jena SPARQL query string interpolator",
     libraryDependencies ++= Seq(
       "com.propensive" %% "contextual" % "1.2.1",
+      "com.propensive" %% "magnolia" % "0.16.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided",
       "org.apache.jena" % "jena-arq" % "3.15.0",
       "com.lihaoyi" %% "utest" % utestVersion % Test
