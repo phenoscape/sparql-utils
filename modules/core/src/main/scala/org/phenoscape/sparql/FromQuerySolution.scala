@@ -9,7 +9,7 @@ import scala.language.experimental.macros
 
 trait FromQuerySolution[T] {
 
-  def fromQuerySolution(qs: QuerySolution, prefix: String = ""): T
+  def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): T
 
 }
 
@@ -18,9 +18,9 @@ object FromQuerySolution {
   type Typeclass[T] = FromQuerySolution[T]
 
   def combine[T](caseClass: CaseClass[FromQuerySolution, T]): FromQuerySolution[T] = new FromQuerySolution[T] {
-    def fromQuerySolution(qs: QuerySolution, prefix: String): T = caseClass.construct { p =>
-      val separator = if (prefix.isEmpty) "" else "_"
-      p.typeclass.fromQuerySolution(qs, s"$prefix$separator${p.label}")
+    def fromQuerySolution(qs: QuerySolution, variablePath: String): T = caseClass.construct { p =>
+      val separator = if (variablePath.isEmpty) "" else "_"
+      p.typeclass.fromQuerySolution(qs, s"$variablePath$separator${p.label}")
     }
   }
 
@@ -29,47 +29,47 @@ object FromQuerySolution {
   implicit def gen[T]: FromQuerySolution[T] = macro Magnolia.gen[T]
 
   implicit def optionFromQuerySolution[T: FromQuerySolution]: FromQuerySolution[Option[T]] = new FromQuerySolution[Option[T]] {
-    override def fromQuerySolution(qs: QuerySolution, prefix: String): Option[T] = {
+    override def fromQuerySolution(qs: QuerySolution, variablePath: String): Option[T] = {
       val tFQS = implicitly[FromQuerySolution[T]]
-      if (qs.varNames.asScala.exists(name => name.startsWith(prefix) && qs.get(name) != null))
-        Some(tFQS.fromQuerySolution(qs, prefix))
+      if (qs.varNames.asScala.exists(name => name.startsWith(variablePath) && qs.get(name) != null))
+        Some(tFQS.fromQuerySolution(qs, variablePath))
       else None
     }
   }
 
   implicit object IRIFromQuerySolution extends FromQuerySolution[IRI] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): IRI = IRIFactory.iriImplementation.construct(qs.getResource(prefix).getURI)
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): IRI = IRIFactory.iriImplementation.construct(qs.getResource(variablePath).getURI)
 
   }
 
   implicit object StringFromQuerySolution extends FromQuerySolution[String] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): String = qs.getLiteral(prefix).getLexicalForm
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): String = qs.getLiteral(variablePath).getLexicalForm
 
   }
 
   implicit object IntFromQuerySolution extends FromQuerySolution[Int] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): Int = qs.getLiteral(prefix).getInt
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): Int = qs.getLiteral(variablePath).getInt
 
   }
 
   implicit object LongFromQuerySolution extends FromQuerySolution[Long] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): Long = qs.getLiteral(prefix).getLong
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): Long = qs.getLiteral(variablePath).getLong
 
   }
 
   implicit object FloatFromQuerySolution extends FromQuerySolution[Float] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): Float = qs.getLiteral(prefix).getFloat
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): Float = qs.getLiteral(variablePath).getFloat
 
   }
 
   implicit object DoubleFromQuerySolution extends FromQuerySolution[Double] {
 
-    def fromQuerySolution(qs: QuerySolution, prefix: String = ""): Double = qs.getLiteral(prefix).getDouble
+    def fromQuerySolution(qs: QuerySolution, variablePath: String = ""): Double = qs.getLiteral(variablePath).getDouble
 
   }
 
