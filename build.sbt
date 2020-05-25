@@ -6,7 +6,7 @@ lazy val commonSettings = Seq(
   organization := "org.phenoscape",
   version := "1.2-SNAPSHOT",
   licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT")),
-  homepage := Some(url("https://github.com/phenoscape/sparql-interpolator")),
+  homepage := Some(url("https://github.com/phenoscape/sparql-utils")),
   crossScalaVersions := Seq("2.12.11"),
   // Can't support 2.13 until new Contextual release: https://github.com/propensive/contextual/pull/56
   //crossScalaVersions := Seq("2.12.11", "2.13.2"),
@@ -23,8 +23,8 @@ lazy val publishSettings = Seq(
   },
   pomExtra := (
     <scm>
-      <url>git@github.com:phenoscape/sparql-interpolator.git</url>
-      <connection>scm:git:git@github.com:phenoscape/sparql-interpolator.git</connection>
+      <url>git@github.com:phenoscape/sparql-utils.git</url>
+      <connection>scm:git:git@github.com:phenoscape/sparql-utils.git</connection>
     </scm>
       <developers>
         <developer>
@@ -46,9 +46,11 @@ lazy val testSettings = Seq(
   )
 )
 
-lazy val sparqlInterpolator = project.in(file("."))
+lazy val parentProject = project.in(file("."))
   .settings(commonSettings)
-  .settings(Seq(skip in publish := true))
+  .settings(
+    name := "sparql-utils-project",
+    skip in publish := true)
   .aggregate(
     core,
     owlapi
@@ -59,12 +61,12 @@ lazy val core = project.in(file("modules/core"))
   .settings(testSettings)
   .settings(publishSettings)
   .settings(
-    name := "sparql-interpolator",
-    description := "Jena SPARQL query string interpolator",
+    name := "sparql-utils",
+    description := "Jena SPARQL utilities for Scala",
     libraryDependencies ++= Seq(
       "com.propensive" %% "contextual" % "1.2.1",
       "com.propensive" %% "magnolia" % "0.16.0",
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided",
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value % Provided,
       "org.apache.jena" % "jena-arq" % "3.15.0"
     )
   )
@@ -75,8 +77,8 @@ lazy val owlapi = project.in(file("modules/owlapi"))
   .settings(testSettings)
   .settings(publishSettings)
   .settings(
-    name := "sparql-interpolator-owlapi",
-    description := "SPARQL interpolator OWL API extension",
+    name := "sparql-utils-owlapi",
+    description := "SPARQL utilities OWL API extension",
     libraryDependencies ++= Seq(
       "net.sourceforge.owlapi" % "owlapi-distribution" % "4.5.16"
     )
