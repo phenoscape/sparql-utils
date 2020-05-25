@@ -8,10 +8,10 @@ import utest._
 
 object SPARQLInterpolationOWLTest extends TestSuite {
 
-  val factory = OWLManager.getOWLDataFactory
+  private val factory = OWLManager.getOWLDataFactory
 
-  val tests = Tests {
-    "OWL objects should be formatted correctly in SPARQL" - {
+  val tests: Tests = Tests {
+    test("OWL objects should be formatted correctly in SPARQL") {
       val class1 = factory.getOWLClass(IRI.create("http://example.org/1"))
       val prop2 = factory.getOWLObjectProperty(IRI.create("http://example.org/2"))
       val class3 = factory.getOWLClass(IRI.create("http://example.org/3"))

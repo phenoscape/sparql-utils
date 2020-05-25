@@ -7,8 +7,8 @@ import utest._
 
 object SPARQLInterpolatorTest extends TestSuite {
 
-  val tests = Tests {
-    "Jena objects should be formatted correctly in SPARQL" - {
+  val tests: Tests = Tests {
+    test("Jena objects should be formatted correctly in SPARQL") {
       val uri1 = ResourceFactory.createResource("http://example.org/1")
       val prop2 = ResourceFactory.createProperty("http://example.org/2")
       val uri3 = ResourceFactory.createResource("http://example.org/3")
