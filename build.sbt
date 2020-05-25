@@ -4,7 +4,7 @@ lazy val utestVersion = "0.7.4"
 
 lazy val commonSettings = Seq(
   organization := "org.phenoscape",
-  version := "1.2-SNAPSHOT",
+  version := "1.2",
   licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT")),
   homepage := Some(url("https://github.com/phenoscape/sparql-utils")),
   crossScalaVersions := Seq("2.12.11"),
