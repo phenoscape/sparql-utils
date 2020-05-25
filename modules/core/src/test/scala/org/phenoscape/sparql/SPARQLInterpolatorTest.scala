@@ -47,6 +47,11 @@ WHERE {
 """
       assert(query.text == expected)
       assert(query.toQuery.isSelectType)
+
+      case class Person(name: String)
+      val person = Person("Incitatus")
+      // No typeclass instance for Person
+      compileError("""sparql"$person"""")
     }
   }
 

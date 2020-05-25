@@ -45,8 +45,19 @@ object FromQuerySolutionTest extends TestSuite {
       val qs6 = new QuerySolutionMap()
       qs6.add("name", ResourceFactory.createResource("http://example.org/Aurelius"))
       qs6.add("friend_name", ResourceFactory.createPlainLiteral("Tiberius"))
-      val Failure(error) = mapSolution[PersonWithFriend].apply(qs6)
-      assert(error.isInstanceOf[IllegalArgumentException])
+      val Failure(error6) = mapSolution[PersonWithFriend].apply(qs6)
+      // name is wrong type
+      assert(error6.isInstanceOf[IllegalArgumentException])
+
+      val qs7 = new QuerySolutionMap()
+      qs7.add("name", ResourceFactory.createPlainLiteral("Marcus"))
+      qs7.add("lastName", ResourceFactory.createResource("http://example.org/Aurelius"))
+      val Failure(error7) = mapSolution[PersonWithOptionalLastName].apply(qs7)
+      // lastName is present but wrong type
+      assert(error7.isInstanceOf[IllegalArgumentException])
+
+      val results = List(qs, qs6)
+      assert(results.map(mapSolution[PersonWithFriend]).flatMap(_.toOption.toList).size == 1)
     }
   }
 
