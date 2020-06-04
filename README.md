@@ -6,7 +6,10 @@
 - A string interpolator for embedding and properly formatting/escaping Scala objects within SPARQL.
 - Decoding of SPARQL SELECT results to case class instances via automatic typeclass derivation.
 
-SPARQL handling in `sparql-utils` is based on [Apache Jena](https://jena.apache.org). A separate module provides additional support for [OWL API](https://owlcs.github.io/owlapi/) types.
+SPARQL handling in `sparql-utils` is based on [Apache Jena](https://jena.apache.org). 
+A separate module provides additional support for [OWL API](https://owlcs.github.io/owlapi/) types. 
+`sparql-utils` depends on two great libraries for its implementation: 
+[propensive/contextual](https://github.com/propensive/contextual) and [propensive/magnolia](https://github.com/propensive/magnolia).
 
 ## Dependency configuration
 
