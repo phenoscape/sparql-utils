@@ -83,6 +83,18 @@ WHERE {
   ?person <http://xmlns.com/foaf/0.1/name> ?name .
 }
 )
-
 ```
+
+You can convert the `QueryText` to a Jena `Query` (may throw a `QueryParseException`):
+
+```scala
+scala> res0.toQuery
+res1: org.apache.jena.query.Query =
+SELECT  ?name
+WHERE
+  { VALUES ?person { <http://example.org/Homer> <http://example.org/Marge> <http://example.org/Bart> }
+    ?person  <http://xmlns.com/foaf/0.1/name>  ?name
+  }
+```
+
 ### SPARQL query result decoding
