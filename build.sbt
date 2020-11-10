@@ -41,7 +41,7 @@ lazy val testSettings = Seq(
   fork in Test := true,
   testFrameworks += new TestFramework("utest.runner.Framework"),
   libraryDependencies ++= Seq(
-    "com.outr" %% "scribe-slf4j" % "2.7.12" % Test,
+    "com.outr" %% "scribe-slf4j" % "2.7.13" % Test,
     "com.lihaoyi" %% "utest" % utestVersion % Test
   )
 )
