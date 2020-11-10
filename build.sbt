@@ -65,7 +65,7 @@ lazy val core = project.in(file("modules/core"))
     description := "Jena SPARQL utilities for Scala",
     libraryDependencies ++= Seq(
       "com.propensive" %% "contextual" % "1.2.1",
-      "com.propensive" %% "magnolia" % "0.16.0",
+      "com.propensive" %% "magnolia" % "0.17.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % Provided,
       "org.apache.jena" % "jena-arq" % "3.15.0"
     )
