@@ -41,8 +41,8 @@ lazy val testSettings = Seq(
   fork in Test := true,
   testFrameworks += new TestFramework("utest.runner.Framework"),
   libraryDependencies ++= Seq(
-    "com.outr" %% "scribe-slf4j" % "2.7.13" % Test,
-    "com.lihaoyi" %% "utest" % utestVersion % Test
+    "com.outr"    %% "scribe-slf4j" % "2.7.13"     % Test,
+    "com.lihaoyi" %% "utest"        % utestVersion % Test
   )
 )
 
@@ -64,10 +64,10 @@ lazy val core = project.in(file("modules/core"))
     name := "sparql-utils",
     description := "Jena SPARQL utilities for Scala",
     libraryDependencies ++= Seq(
-      "com.propensive" %% "contextual" % "1.2.1",
-      "com.propensive" %% "magnolia" % "0.17.0",
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value % Provided,
-      "org.apache.jena" % "jena-arq" % "3.16.0"
+      "com.propensive" %% "contextual"    % "1.2.1",
+      "com.propensive" %% "magnolia"      % "0.17.0",
+      "org.scala-lang"  % "scala-reflect" % scalaVersion.value % Provided,
+      "org.apache.jena" % "jena-arq"      % "3.16.0"
     )
   )
 
