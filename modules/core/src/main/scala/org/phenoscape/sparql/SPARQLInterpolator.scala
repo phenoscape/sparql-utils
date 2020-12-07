@@ -122,7 +122,7 @@ object SPARQLInterpolation {
 
   implicit class SPARQLStringContext(val sc: StringContext) {
 
-    def sparql(expressions: String*): QueryText = macro Macros.contextual[SPARQLInterpolator.type]
+    val sparql: Prefix[String, QueryText, SPARQLInterpolator.SPARQLContextType, SPARQLInterpolation.SPARQLInterpolator.type] = Prefix(SPARQLInterpolator, sc)
 
   }
 
