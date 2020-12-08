@@ -7,9 +7,7 @@ lazy val commonSettings = Seq(
   version := "1.2",
   licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT")),
   homepage := Some(url("https://github.com/phenoscape/sparql-utils")),
-  crossScalaVersions := Seq("2.12.11"),
-  // Can't support 2.13 until new Contextual release: https://github.com/propensive/contextual/pull/56
-  //crossScalaVersions := Seq("2.12.11", "2.13.2"),
+  crossScalaVersions := Seq("2.12.12", "2.13.3"),
   scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 )
 
@@ -64,10 +62,10 @@ lazy val core = project.in(file("modules/core"))
     name := "sparql-utils",
     description := "Jena SPARQL utilities for Scala",
     libraryDependencies ++= Seq(
-      "com.propensive" %% "contextual" % "1.2.1",
-      "com.propensive" %% "magnolia" % "0.17.0",
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value % Provided,
-      "org.apache.jena" % "jena-arq" % "3.16.0"
+      "com.propensive" %% "contextual-core" % "3.0.0",
+      "com.propensive" %% "magnolia"        % "0.17.0",
+      "org.scala-lang"  % "scala-reflect"   % scalaVersion.value % Provided,
+      "org.apache.jena" % "jena-arq"        % "3.16.0"
     )
   )
 

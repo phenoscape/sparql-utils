@@ -4,8 +4,11 @@ import contextual._
 import org.apache.jena.graph.Node
 import org.apache.jena.query.{ParameterizedSparqlString, Query, QueryFactory}
 import org.apache.jena.rdf.model.{Property, Resource, Literal => JenaLiteral}
+import language.experimental.macros
 
 object SPARQLInterpolation {
+
+  type SPARQLEmbedder[T] = Embedder[(SPARQLInterpolator.SPARQLContext.type, SPARQLInterpolator.SPARQLContext.type), T, String, SPARQLInterpolation.SPARQLInterpolator.type]
 
   final case class QueryText(text: String) {
 
@@ -43,59 +46,59 @@ object SPARQLInterpolation {
 
   import SPARQLInterpolator.SPARQLContext
 
-  implicit val embedQueryTextInSPARQL = SPARQLInterpolator.embed[QueryText](
+  implicit val embedQueryTextInSPARQL: SPARQLEmbedder[QueryText] = SPARQLInterpolator.embed[QueryText](
     Case(SPARQLContext, SPARQLContext)(_.text))
 
-  implicit val embedStringInSPARQL = SPARQLInterpolator.embed[String](
+  implicit val embedStringInSPARQL: SPARQLEmbedder[String] = SPARQLInterpolator.embed[String](
     Case(SPARQLContext, SPARQLContext)(str => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(str)
       pss.toString
     }))
 
-  implicit val embedIntInSPARQL = SPARQLInterpolator.embed[Int](
+  implicit val embedIntInSPARQL: SPARQLEmbedder[Int] = SPARQLInterpolator.embed[Int](
     Case(SPARQLContext, SPARQLContext)(num => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(num)
       pss.toString
     }))
 
-  implicit val embedLongInSPARQL = SPARQLInterpolator.embed[Long](
+  implicit val embedLongInSPARQL: SPARQLEmbedder[Long] = SPARQLInterpolator.embed[Long](
     Case(SPARQLContext, SPARQLContext)(num => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(num)
       pss.toString
     }))
 
-  implicit val embedFloatInSPARQL = SPARQLInterpolator.embed[Float](
+  implicit val embedFloatInSPARQL: SPARQLEmbedder[Float] = SPARQLInterpolator.embed[Float](
     Case(SPARQLContext, SPARQLContext)(num => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(num)
       pss.toString
     }))
 
-  implicit val embedDoubleInSPARQL = SPARQLInterpolator.embed[Double](
+  implicit val embedDoubleInSPARQL: SPARQLEmbedder[Double] = SPARQLInterpolator.embed[Double](
     Case(SPARQLContext, SPARQLContext)(num => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(num)
       pss.toString
     }))
 
-  implicit val embedBooleanInSPARQL = SPARQLInterpolator.embed[Boolean](
+  implicit val embedBooleanInSPARQL: SPARQLEmbedder[Boolean] = SPARQLInterpolator.embed[Boolean](
     Case(SPARQLContext, SPARQLContext)(bool => {
       val pss = new ParameterizedSparqlString()
       pss.appendLiteral(bool)
       pss.toString
     }))
 
-  implicit val embedJenaNodeInSPARQL = SPARQLInterpolator.embed[Node](
+  implicit val embedJenaNodeInSPARQL: SPARQLEmbedder[Node] = SPARQLInterpolator.embed[Node](
     Case(SPARQLContext, SPARQLContext)(node => {
       val pss = new ParameterizedSparqlString()
       pss.appendNode(node)
       pss.toString
     }))
 
-  implicit val embedJenaResourceInSPARQL = SPARQLInterpolator.embed[Resource](
+  implicit val embedJenaResourceInSPARQL: SPARQLEmbedder[Resource] = SPARQLInterpolator.embed[Resource](
     Case(SPARQLContext, SPARQLContext)(resource => {
       if (resource.isAnon) throw new IllegalArgumentException("Blank nodes are not supported in SPARQL interpolations.")
       val pss = new ParameterizedSparqlString()
@@ -103,14 +106,14 @@ object SPARQLInterpolation {
       pss.toString
     }))
 
-  implicit val embedJenaPropertyInSPARQL = SPARQLInterpolator.embed[Property](
+  implicit val embedJenaPropertyInSPARQL: SPARQLEmbedder[Property] = SPARQLInterpolator.embed[Property](
     Case(SPARQLContext, SPARQLContext)(property => {
       val pss = new ParameterizedSparqlString()
       pss.appendNode(property.asNode)
       pss.toString
     }))
 
-  implicit val embedJenaLiteralInSPARQL = SPARQLInterpolator.embed[JenaLiteral](
+  implicit val embedJenaLiteralInSPARQL: SPARQLEmbedder[JenaLiteral] = SPARQLInterpolator.embed[JenaLiteral](
     Case(SPARQLContext, SPARQLContext)(literal => {
       val pss = new ParameterizedSparqlString()
       pss.appendNode(literal.asNode)
@@ -119,7 +122,7 @@ object SPARQLInterpolation {
 
   implicit class SPARQLStringContext(val sc: StringContext) {
 
-    val sparql = Prefix(SPARQLInterpolator, sc)
+    val sparql: Prefix[String, QueryText, SPARQLInterpolator.SPARQLContextType, SPARQLInterpolation.SPARQLInterpolator.type] = Prefix(SPARQLInterpolator, sc)
 
   }
 

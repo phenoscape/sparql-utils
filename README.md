@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/phenoscape/sparql-utils.svg?branch=master)](https://travis-ci.com/phenoscape/sparql-utils)
-
 # sparql-utils
 
 `sparql-utils` provides some convenient utilities for working with SPARQL queries in Scala. Current functionality includes:
