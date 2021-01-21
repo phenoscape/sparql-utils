@@ -1,6 +1,6 @@
 import sbt.Keys.{crossScalaVersions, fork, homepage, publishMavenStyle, scalacOptions}
 
-lazy val utestVersion = "0.7.5"
+lazy val utestVersion = "0.7.6"
 
 lazy val commonSettings = Seq(
   organization := "org.phenoscape",
