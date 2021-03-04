@@ -4,6 +4,8 @@ import contextual._
 import org.apache.jena.graph.Node
 import org.apache.jena.query.{ParameterizedSparqlString, Query, QueryFactory}
 import org.apache.jena.rdf.model.{Property, Resource, Literal => JenaLiteral}
+import org.apache.jena.sparql.path.Path
+
 import language.experimental.macros
 
 object SPARQLInterpolation {
@@ -95,6 +97,13 @@ object SPARQLInterpolation {
     Case(SPARQLContext, SPARQLContext)(node => {
       val pss = new ParameterizedSparqlString()
       pss.appendNode(node)
+      pss.toString
+    }))
+
+  implicit val embedJenaPropertyPathInSPARQL: SPARQLEmbedder[Path] = SPARQLInterpolator.embed[Path](
+    Case(SPARQLContext, SPARQLContext)(path => {
+      val pss = new ParameterizedSparqlString()
+      pss.append(path)
       pss.toString
     }))
 

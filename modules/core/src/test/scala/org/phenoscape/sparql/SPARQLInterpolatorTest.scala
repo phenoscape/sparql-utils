@@ -2,6 +2,7 @@ package org.phenoscape.sparql
 
 import org.apache.jena.graph.NodeFactory
 import org.apache.jena.rdf.model.ResourceFactory
+import org.apache.jena.sparql.path.{P_Link, P_OneOrMore1, Path}
 import org.phenoscape.sparql.SPARQLInterpolation._
 import utest._
 
@@ -20,6 +21,7 @@ object SPARQLInterpolatorTest extends TestSuite {
       val queryPart = sparql"$uri3 $prop2 $int2 ."
       val node1 = NodeFactory.createURI("http://example.org/node/1")
       val node2 = NodeFactory.createLiteral("à bientôt", "fr")
+      val path1: Path = new P_OneOrMore1(new P_Link(node1))
       val values = List(uri1, uri3, uri4).map(v => sparql"$v ").reduce(_ + _)
       val query =
         sparql"""
@@ -30,6 +32,7 @@ WHERE {
   $uri1 $prop2 $int1 .
   $queryPart
   $node1 ?p $string2 .
+  $node1 $path1 $node1 .
   ?s ?q $node2 .
 }
 """
@@ -42,6 +45,7 @@ WHERE {
   <http://example.org/1> <http://example.org/2> "42"^^<http://www.w3.org/2001/XMLSchema#int> .
   <http://example.org/3> <http://example.org/2> 43 .
   <http://example.org/node/1> ?p "this is string 2" .
+  <http://example.org/node/1> (<http://example.org/node/1>)+ <http://example.org/node/1> .
   ?s ?q "à bientôt"@fr .
 }
 """
