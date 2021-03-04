@@ -2,6 +2,7 @@
 .classpath
 .project
 .settings
+.bsp/
 bin
 catalog-v001.xml
 project/project
