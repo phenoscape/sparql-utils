@@ -1,13 +1,13 @@
 import sbt.Keys.{crossScalaVersions, fork, homepage, publishMavenStyle, scalacOptions}
 
-lazy val utestVersion = "0.7.5"
+lazy val utestVersion = "0.7.7"
 
 lazy val commonSettings = Seq(
   organization := "org.phenoscape",
-  version := "1.2",
+  version := "1.3",
   licenses := Seq("MIT license" -> url("https://opensource.org/licenses/MIT")),
   homepage := Some(url("https://github.com/phenoscape/sparql-utils")),
-  crossScalaVersions := Seq("2.12.13", "2.13.3"),
+  crossScalaVersions := Seq("2.12.13", "2.13.5"),
   scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 )
 
@@ -64,7 +64,7 @@ lazy val core = project.in(file("modules/core"))
       "com.propensive" %% "contextual-core" % "3.0.0",
       "com.propensive" %% "magnolia"        % "0.17.0",
       "org.scala-lang"  % "scala-reflect"   % scalaVersion.value % Provided,
-      "org.apache.jena" % "jena-arq"        % "3.16.0"
+      "org.apache.jena" % "jena-arq"        % "3.17.0"
     )
   )
 
