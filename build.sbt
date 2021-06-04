@@ -64,7 +64,7 @@ lazy val core = project.in(file("modules/core"))
       "com.propensive" %% "contextual-core" % "3.0.0",
       "com.propensive" %% "magnolia"        % "0.17.0",
       "org.scala-lang"  % "scala-reflect"   % scalaVersion.value % Provided,
-      "org.apache.jena" % "jena-arq"        % "3.17.0"
+      "org.apache.jena" % "jena-arq"        % "4.1.0"
     )
   )
 
